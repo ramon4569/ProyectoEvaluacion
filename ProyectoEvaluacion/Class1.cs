@@ -12,7 +12,8 @@
 
     public class Cadenadeconexion
     {
-         public string connectionString = "Server=.;Database=Evaluaciones;Integrated Security=true" + " ;TrustServerCertificate=True;"; // Reemplaza esto
+         public string connectionString = "Server=.;Database=Evaluaciones;Integrated Security=true" + " ;TrustServerCertificate=True;"; // Cadena de conexión con SQL SERVER
+        
     }
 
 

@@ -1,176 +1,105 @@
 ﻿using System;
 using Microsoft.Data.SqlClient;
 using System.Collections;
+using System.Data;
+using CapaDatos;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 
 namespace CapaNegocio
 {
     public class Evaluacion
     {
+        public string Estudiante { get; set; }
         public int Id { get; set; }
-        public string Tipo { get; protected set; } // Protegido para que solo las clases derivadas lo establezcan
+        public string Tipo { get;  set; } // Protegido para que solo las clases derivadas lo establezcan  
         public DateTime Fecha { get; set; }
-        public decimal? Calificacion { get; set; } // Usamos decimal? para permitir nulos si la calificación no se ha asignado
+        public decimal? Calificacion { get; set; } // Usamos decimal? para permitir nulos si la calificación no se ha asignado  
         public string Comentarios { get; set; }
-
-        // Constructor base
-        protected Evaluacion(string tipo)
-        {
-            Tipo = tipo;
-            Fecha = DateTime.Today; // Valor por defecto, se puede cambiar
-        }
-
-        // Método virtual que las clases derivadas pueden sobrescribir
-        public virtual string Evaluar()
-        {
-            return $"Evaluación base para {Tipo}. Calificación: {Calificacion?.ToString() ?? "N/A"}";
-        }
-
-        // Podríamos añadir más métodos comunes aquí
     }
 
     public class Examen : Evaluacion
     {
-        // Podría tener propiedades específicas del examen, si las hubiera
-        // public int NumeroDePreguntas { get; set; }
-
-        public Examen() : base("Examen") { }
-
-        // Sobrescritura del método Evaluar
-        public override string Evaluar()
+        public Examen()
         {
-            // Lógica específica para evaluar un examen
-            return $"Evaluación de Examen. Fecha: {Fecha.ToShortDateString()}, Calificación: {Calificacion?.ToString() ?? "Pendiente"}. Comentarios: {Comentarios}";
+            Tipo = "Examen"; // Establecemos el valor de Tipo en el constructor  
         }
-        public class Trabajo : Evaluacion
+    }
+    public class Trabajo : Evaluacion
+    {
+        public Trabajo()
         {
-            // Podría tener propiedades específicas del trabajo
-            // public string Tema { get; set; }
-            // public DateTime FechaEntregaEsperada { get; set; }
-
-            public Trabajo() : base("Trabajo") { }
-
-            public override string Evaluar()
-            {
-                return $"Evaluación de Trabajo. Fecha: {Fecha.ToShortDateString()}, Calificación: {Calificacion?.ToString() ?? "Pendiente"}. Comentarios: {Comentarios}";
-            }
+            Tipo = "Trabajo"; // Establecemos el valor de Tipo en el constructor  
         }
-        public class Proyecto : Evaluacion
+    }
+    public class Proyecto : Evaluacion
+    {
+        public Proyecto()
         {
-            // Podría tener propiedades específicas del proyecto
-            // public string FasesDelProyecto { get; set; }
+            Tipo = "Proyecto"; // Establecemos el valor de Tipo en el constructor  
+        }
 
-            public Proyecto() : base("Proyecto") { }
+    }
+    public class EvaluacionNegocio
+    {
+        // Cadena de conexión a la base de datos  
+        private string connectionString = "Server=.;Database=Evaluaciones;Integrated Security=true;TrustServerCertificate=True;";
 
-            public override string Evaluar()
+        // Método para guardar una evaluación en la base de datos  
+        public string GuardarEvaluacion(Evaluacion evaluacionParaGuardar)
+        {
+            // Validación inicial: si la evaluación es nula, se retorna un mensaje  
+            if (evaluacionParaGuardar == null)
             {
-                return $"Evaluación de Proyecto. Fecha: {Fecha.ToShortDateString()}, Calificación: {Calificacion?.ToString() ?? "Pendiente"}. Comentarios: {Comentarios}";
+                return "No hay datos de evaluación para guardar.";
             }
 
-
-            public class EvaluacionDAL
+            // Uso de conexión a la base de datos  
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                // Reemplaza con tu cadena de conexión correcta.
-                // Asegúrate de que esta variable esté definida en tu clase.
-                private string connectionString = "Server=NOMBRE_DE_TU_SERVIDOR;Database=Evaluaciones;Integrated Security=True;";
-                // Ejemplo: private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=Evaluaciones;Integrated Security=True;";
-
-
-                // Constructor (opcional, pero bueno para inicializar si es necesario)
-
-                public Evaluacion[] ObtenerTodasLasEvaluaciones()
+                try
                 {
-                    ArrayList evaluacionesTemp = new ArrayList();
+                    // Abrir la conexión  
+                    conn.Open();
 
-                    // Usar 'using' asegura que la conexión se cierre incluso si hay errores
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    // Consulta SQL para insertar una evaluación  
+                    string query = "INSERT INTO Evaluacion (Estudiante, Tipo, Fecha, Calificacion, Comentario) VALUES (@Estudiante, @Tipo, @Fecha, @Calificacion, @Comentario)";
+
+                    // Configuración del comando SQL  
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        string query = "SELECT id, Tipo, Fecha, Calificacion, Comentario FROM Evaluacion";
-                        SqlCommand command = new SqlCommand(query, connection);
+                        // Asignación de parámetros con valores de la evaluación  
+                        cmd.Parameters.AddWithValue("@Estudiante", string.IsNullOrEmpty(evaluacionParaGuardar.Estudiante) ? (object)DBNull.Value : evaluacionParaGuardar.Estudiante);
+                        cmd.Parameters.AddWithValue("@Tipo", evaluacionParaGuardar.Tipo);
+                        cmd.Parameters.AddWithValue("@Fecha", evaluacionParaGuardar.Fecha);
+                        cmd.Parameters.AddWithValue("@Calificacion", evaluacionParaGuardar.Calificacion.HasValue ? (object)evaluacionParaGuardar.Calificacion.Value : DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Comentario", string.IsNullOrEmpty(evaluacionParaGuardar.Comentarios) ? (object)DBNull.Value : evaluacionParaGuardar.Comentarios);
 
-                        try
+                        // Ejecución del comando y obtención de filas afectadas  
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        // Verificación del resultado de la operación  
+                        if (filasAfectadas > 0)
                         {
-                            connection.Open();
-                            SqlDataReader reader = command.ExecuteReader();
-
-                            while (reader.Read())
-                            {
-                                string tipo = reader["Tipo"].ToString();
-                                Evaluacion evaluacion = null;
-
-                                // Creamos la instancia correcta según el tipo
-                                switch (tipo)
-                                {
-                                    case "Examen":
-                                        evaluacion = new Examen();
-                                        break;
-                                    case "Trabajo":
-                                        evaluacion = new Trabajo();
-                                        break;
-                                    case "Proyecto":
-                                        evaluacion = new Proyecto();
-                                        break;
-                                    default:
-                                        Console.WriteLine($"Tipo de evaluación desconocido: {tipo}");
-                                        continue; // Saltar este registro y continuar con el siguiente
-                                }
-
-                                evaluacion.Id = Convert.ToInt32(reader["id"]);
-                                // 'Tipo' ya está establecido por el constructor de la clase derivada (Examen, Trabajo, Proyecto)
-                                evaluacion.Fecha = Convert.ToDateTime(reader["Fecha"]);
-
-                                // Manejar Calificacion que puede ser DBNull
-                                if (reader["Calificacion"] != DBNull.Value)
-                                {
-                                    evaluacion.Calificacion = Convert.ToDecimal(reader["Calificacion"]);
-                                }
-                                else
-                                {
-                                    evaluacion.Calificacion = null;
-                                }
-
-                                // Manejar Comentario que puede ser DBNull
-                                if (reader["Comentario"] != DBNull.Value)
-                                {
-                                    evaluacion.Comentarios = reader["Comentario"].ToString();
-                                }
-                                else
-                                {
-                                    evaluacion.Comentarios = string.Empty; // O null, según prefieras
-                                }
-
-                                evaluacionesTemp.Add(evaluacion);
-                            }
-                            reader.Close();
+                            return "Evaluación guardada correctamente en la base de datos.";
                         }
-                        catch (SqlException ex) // Es buena práctica capturar excepciones específicas
+                        else
                         {
-                            // Manejar la excepción específica de SQL (ej. loguearla, mostrar un mensaje amigable)
-                            Console.WriteLine("Error de SQL al obtener evaluaciones: " + ex.Message);
-                            // Podrías lanzar la excepción de nuevo si quieres que la capa superior la maneje:
-                            // throw;
-                        }
-                        catch (Exception ex) // Capturar otras excepciones generales
-                        {
-                            // Manejar otras excepciones (ej. loguearla, mostrar un mensaje)
-                            Console.WriteLine("Error general al obtener evaluaciones: " + ex.Message);
-                            // throw;
+                            return "La operación de guardado no afectó ninguna fila.";
                         }
                     }
-
-                    // Convertir el ArrayList a un array de Evaluacion[]
-                    Evaluacion[] resultado = new Evaluacion[evaluacionesTemp.Count];
-                    if (evaluacionesTemp.Count > 0) // Asegurarse de que hay elementos antes de copiar
-                    {
-                        evaluacionesTemp.CopyTo(resultado);
-                    }
-
-                    return resultado;
                 }
-
-                // ... (Aquí irían los otros métodos como AgregarEvaluacion, etc.)
+                catch (SqlException ex)
+                {
+                    // Manejo de errores en caso de excepción SQL  
+                    return $"Error al guardar la evaluación: {ex.Message}";
+                }
             }
         }
     }
+
+
+
 
 }
