@@ -90,47 +90,9 @@ namespace CapaPresentacion
             }
 
             // Usar la cadena de conexión definida en el formulario para conectarse a la base de datos  
-            using (SqlConnection conn = new SqlConnection(this.connectionString))
-            {
-                try
-                {
-                    conn.Open(); // Abrir la conexión a la base de datos  
-
-                    // Consulta SQL para insertar los datos de la evaluación en la tabla  
-                    string query = "INSERT INTO Evaluacion (Estudiante, Tipo, Fecha, Calificacion, Comentario) VALUES (@Estudiante, @Tipo, @Fecha, @Calificacion, @Comentario)";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Agregar parámetros a la consulta para evitar inyección SQL  
-                        cmd.Parameters.AddWithValue("@Estudiante", string.IsNullOrEmpty(evaluacionParaGuardar.Estudiante) ? (object)DBNull.Value : evaluacionParaGuardar.Estudiante);
-                        cmd.Parameters.AddWithValue("@Tipo", evaluacionParaGuardar.Tipo);
-                        cmd.Parameters.AddWithValue("@Fecha", evaluacionParaGuardar.Fecha);
-                        cmd.Parameters.AddWithValue("@Calificacion", evaluacionParaGuardar.Calificacion.HasValue ? (object)evaluacionParaGuardar.Calificacion.Value : DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Comentario", string.IsNullOrEmpty(evaluacionParaGuardar.Comentarios) ? (object)DBNull.Value : evaluacionParaGuardar.Comentarios);
-
-                        // Ejecutar la consulta y verificar cuántas filas fueron afectadas  
-                        int filasAfectadas = cmd.ExecuteNonQuery();
-
-                        if (filasAfectadas > 0)
-                        {
-                            // Mostrar mensaje de éxito si se guardó correctamente  
-                            MessageBox.Show("Evaluación guardada correctamente en la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            // Aquí podrías limpiar los campos del formulario si lo deseas  
-                            // LimpiarCamposFormulario();  
-                        }
-                        else
-                        {
-                            // Mostrar advertencia si no se afectó ninguna fila (caso raro)  
-                            MessageBox.Show("La operación de guardado no afectó ninguna fila.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    // Manejar errores de SQL (puedes mostrar un mensaje o registrar el error)  
-                    MessageBox.Show($"Error al guardar la evaluación: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+          
+            EvaluacionNegocio evaluacionNegocio = new EvaluacionNegocio(); // Crear una instancia de la clase EvaluacionNegocio
+            evaluacionNegocio.GuardarEvaluacion(evaluacionParaGuardar); // Llamar al método GuardarEvaluacion para guardar la evaluación en la base de datos
         }
 
 
