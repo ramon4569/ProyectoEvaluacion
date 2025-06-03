@@ -37,10 +37,10 @@
             LBLTIPO = new Label();
             TXTCOMENTARIO = new TextBox();
             FECHA = new DateTimePicker();
-            TXTCALIFICACION = new TextBox();
             LBLCALIFICACION = new Label();
             LBLNOMBRE = new Label();
             TXTNOMBRE = new TextBox();
+            TXTCALIFICACION = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)dgvEvaluaciones).BeginInit();
             SuspendLayout();
             // 
@@ -65,6 +65,7 @@
             btnMostrarDatos.Name = "btnMostrarDatos";
             btnMostrarDatos.Size = new Size(893, 86);
             btnMostrarDatos.TabIndex = 1;
+            btnMostrarDatos.TabStop = false;
             btnMostrarDatos.Text = "Evaluar_Datos_Ingresados";
             btnMostrarDatos.UseVisualStyleBackColor = false;
             btnMostrarDatos.Click += btnMostrarDatos_Click;
@@ -84,6 +85,7 @@
             button1.Name = "button1";
             button1.Size = new Size(893, 78);
             button1.TabIndex = 3;
+            button1.TabStop = false;
             button1.Text = "Agregar_Datos";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -129,13 +131,6 @@
             FECHA.Size = new Size(125, 27);
             FECHA.TabIndex = 9;
             // 
-            // TXTCALIFICACION
-            // 
-            TXTCALIFICACION.Location = new Point(139, 276);
-            TXTCALIFICACION.Name = "TXTCALIFICACION";
-            TXTCALIFICACION.Size = new Size(125, 27);
-            TXTCALIFICACION.TabIndex = 10;
-            // 
             // LBLCALIFICACION
             // 
             LBLCALIFICACION.AutoSize = true;
@@ -161,15 +156,25 @@
             TXTNOMBRE.Size = new Size(125, 27);
             TXTNOMBRE.TabIndex = 13;
             // 
+            // TXTCALIFICACION
+            // 
+            TXTCALIFICACION.Location = new Point(139, 283);
+            TXTCALIFICACION.Mask = "99999";
+            TXTCALIFICACION.Name = "TXTCALIFICACION";
+            TXTCALIFICACION.Size = new Size(125, 27);
+            TXTCALIFICACION.TabIndex = 14;
+            TXTCALIFICACION.ValidatingType = typeof(int);
+            TXTCALIFICACION.MaskInputRejected += maskedTextBox1_MaskInputRejected;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1216, 450);
+            Controls.Add(TXTCALIFICACION);
             Controls.Add(TXTNOMBRE);
             Controls.Add(LBLNOMBRE);
             Controls.Add(LBLCALIFICACION);
-            Controls.Add(TXTCALIFICACION);
             Controls.Add(FECHA);
             Controls.Add(TXTCOMENTARIO);
             Controls.Add(LBLTIPO);
@@ -198,9 +203,10 @@
         private Label LBLTIPO;
         private TextBox TXTCOMENTARIO;
         private DateTimePicker FECHA;
-        private TextBox TXTCALIFICACION;
+        
         private Label LBLCALIFICACION;
         private Label LBLNOMBRE;
         private TextBox TXTNOMBRE;
+        private MaskedTextBox TXTCALIFICACION;
     }
 }

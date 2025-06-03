@@ -30,6 +30,10 @@ namespace CapaPresentacion
         public Form1()
         {
             InitializeComponent();
+            if (this.CB != null) // Comando para hacer que el ComboBox no se le pueda escribir encima
+            {
+                this.CB.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
 
 
         }
@@ -90,7 +94,7 @@ namespace CapaPresentacion
             }
 
             // Usar la cadena de conexión definida en el formulario para conectarse a la base de datos  
-          
+
             EvaluacionNegocio evaluacionNegocio = new EvaluacionNegocio(); // Crear una instancia de la clase EvaluacionNegocio
             evaluacionNegocio.GuardarEvaluacion(evaluacionParaGuardar); // Llamar al método GuardarEvaluacion para guardar la evaluación en la base de datos
         }
@@ -113,7 +117,21 @@ namespace CapaPresentacion
 
 
 
+        private void TXTCALIFICACION_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
- 
+
 }
 
