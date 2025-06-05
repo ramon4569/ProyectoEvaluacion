@@ -47,7 +47,7 @@
             // dgvEvaluaciones
             // 
             dgvEvaluaciones.AccessibleRole = AccessibleRole.None;
-            dgvEvaluaciones.BackgroundColor = Color.Lavender;
+            dgvEvaluaciones.BackgroundColor = Color.LemonChiffon;
             dgvEvaluaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEvaluaciones.Enabled = false;
             dgvEvaluaciones.Location = new Point(297, 12);
@@ -59,7 +59,7 @@
             // 
             // btnMostrarDatos
             // 
-            btnMostrarDatos.BackColor = Color.GhostWhite;
+            btnMostrarDatos.BackColor = Color.LemonChiffon;
             btnMostrarDatos.ForeColor = Color.DarkSlateGray;
             btnMostrarDatos.Location = new Point(297, 338);
             btnMostrarDatos.Name = "btnMostrarDatos";
@@ -81,13 +81,14 @@
             // 
             // button1
             // 
+            button1.BackColor = SystemColors.Info;
             button1.Location = new Point(297, 254);
             button1.Name = "button1";
             button1.Size = new Size(893, 78);
             button1.TabIndex = 3;
             button1.TabStop = false;
             button1.Text = "Agregar_Datos";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // LBLFECHA
@@ -170,6 +171,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(1216, 450);
             Controls.Add(TXTCALIFICACION);
             Controls.Add(TXTNOMBRE);
