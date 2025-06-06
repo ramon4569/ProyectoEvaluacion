@@ -41,29 +41,31 @@
             LBLNOMBRE = new Label();
             TXTNOMBRE = new TextBox();
             TXTCALIFICACION = new MaskedTextBox();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvEvaluaciones).BeginInit();
             SuspendLayout();
             // 
             // dgvEvaluaciones
             // 
             dgvEvaluaciones.AccessibleRole = AccessibleRole.None;
-            dgvEvaluaciones.BackgroundColor = Color.LemonChiffon;
+            dgvEvaluaciones.BackgroundColor = SystemColors.ButtonHighlight;
             dgvEvaluaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEvaluaciones.Enabled = false;
-            dgvEvaluaciones.Location = new Point(297, 12);
+            dgvEvaluaciones.Location = new Point(609, 24);
             dgvEvaluaciones.Name = "dgvEvaluaciones";
             dgvEvaluaciones.RowHeadersWidth = 51;
-            dgvEvaluaciones.Size = new Size(893, 224);
+            dgvEvaluaciones.Size = new Size(808, 224);
             dgvEvaluaciones.TabIndex = 0;
             dgvEvaluaciones.CellContentClick += dgvEvaluaciones_CellContentClick;
             // 
             // btnMostrarDatos
             // 
-            btnMostrarDatos.BackColor = Color.LemonChiffon;
-            btnMostrarDatos.ForeColor = Color.DarkSlateGray;
-            btnMostrarDatos.Location = new Point(297, 338);
+            btnMostrarDatos.BackColor = Color.DarkSlateGray;
+            btnMostrarDatos.ForeColor = Color.Honeydew;
+            btnMostrarDatos.Location = new Point(609, 343);
             btnMostrarDatos.Name = "btnMostrarDatos";
-            btnMostrarDatos.Size = new Size(893, 86);
+            btnMostrarDatos.Size = new Size(808, 86);
             btnMostrarDatos.TabIndex = 1;
             btnMostrarDatos.TabStop = false;
             btnMostrarDatos.Text = "Evaluar_Datos_Ingresados";
@@ -73,7 +75,7 @@
             // CB
             // 
             CB.FormattingEnabled = true;
-            CB.Location = new Point(139, 149);
+            CB.Location = new Point(403, 228);
             CB.Name = "CB";
             CB.Size = new Size(125, 28);
             CB.TabIndex = 2;
@@ -81,10 +83,11 @@
             // 
             // button1
             // 
-            button1.BackColor = SystemColors.Info;
-            button1.Location = new Point(297, 254);
+            button1.BackColor = Color.DarkSlateGray;
+            button1.ForeColor = SystemColors.ControlLightLight;
+            button1.Location = new Point(609, 257);
             button1.Name = "button1";
-            button1.Size = new Size(893, 78);
+            button1.Size = new Size(808, 78);
             button1.TabIndex = 3;
             button1.TabStop = false;
             button1.Text = "Agregar_Datos";
@@ -94,72 +97,77 @@
             // LBLFECHA
             // 
             LBLFECHA.AutoSize = true;
-            LBLFECHA.Location = new Point(28, 229);
+            LBLFECHA.Font = new Font("Segoe UI Variable Display Semib", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LBLFECHA.Location = new Point(38, 393);
             LBLFECHA.Name = "LBLFECHA";
-            LBLFECHA.Size = new Size(54, 20);
+            LBLFECHA.Size = new Size(56, 20);
             LBLFECHA.TabIndex = 4;
             LBLFECHA.Text = "FECHA";
             // 
             // LBLCOMENTARIO
             // 
             LBLCOMENTARIO.AutoSize = true;
-            LBLCOMENTARIO.Location = new Point(28, 343);
+            LBLCOMENTARIO.Font = new Font("Segoe UI Variable Small", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LBLCOMENTARIO.Location = new Point(36, 324);
             LBLCOMENTARIO.Name = "LBLCOMENTARIO";
-            LBLCOMENTARIO.Size = new Size(102, 20);
+            LBLCOMENTARIO.Size = new Size(111, 20);
             LBLCOMENTARIO.TabIndex = 5;
             LBLCOMENTARIO.Text = "COMENTARIO";
             // 
             // LBLTIPO
             // 
             LBLTIPO.AutoSize = true;
-            LBLTIPO.Location = new Point(28, 149);
+            LBLTIPO.Font = new Font("Segoe UI Variable Small", 9F, FontStyle.Bold);
+            LBLTIPO.Location = new Point(338, 231);
             LBLTIPO.Name = "LBLTIPO";
-            LBLTIPO.Size = new Size(40, 20);
+            LBLTIPO.Size = new Size(44, 20);
             LBLTIPO.TabIndex = 6;
             LBLTIPO.Text = "TIPO";
             // 
             // TXTCOMENTARIO
             // 
-            TXTCOMENTARIO.Location = new Point(139, 340);
+            TXTCOMENTARIO.Location = new Point(169, 321);
             TXTCOMENTARIO.Name = "TXTCOMENTARIO";
             TXTCOMENTARIO.Size = new Size(125, 27);
             TXTCOMENTARIO.TabIndex = 8;
             // 
             // FECHA
             // 
-            FECHA.Location = new Point(139, 224);
+            FECHA.Location = new Point(169, 388);
             FECHA.Name = "FECHA";
-            FECHA.Size = new Size(125, 27);
+            FECHA.Size = new Size(317, 27);
             FECHA.TabIndex = 9;
             // 
             // LBLCALIFICACION
             // 
             LBLCALIFICACION.AutoSize = true;
-            LBLCALIFICACION.Location = new Point(26, 283);
+            LBLCALIFICACION.Font = new Font("Segoe UI Variable Small", 9F, FontStyle.Bold);
+            LBLCALIFICACION.Location = new Point(38, 228);
             LBLCALIFICACION.Name = "LBLCALIFICACION";
-            LBLCALIFICACION.Size = new Size(104, 20);
+            LBLCALIFICACION.Size = new Size(116, 20);
             LBLCALIFICACION.TabIndex = 11;
             LBLCALIFICACION.Text = "CALIFICACION";
             // 
             // LBLNOMBRE
             // 
             LBLNOMBRE.AutoSize = true;
-            LBLNOMBRE.Location = new Point(28, 81);
+            LBLNOMBRE.Font = new Font("Segoe UI Variable Small", 9F, FontStyle.Bold);
+            LBLNOMBRE.Location = new Point(38, 141);
             LBLNOMBRE.Name = "LBLNOMBRE";
-            LBLNOMBRE.Size = new Size(70, 20);
+            LBLNOMBRE.Size = new Size(75, 20);
             LBLNOMBRE.TabIndex = 12;
             LBLNOMBRE.Text = "NOMBRE";
             // 
             // TXTNOMBRE
             // 
-            TXTNOMBRE.Location = new Point(139, 81);
+            TXTNOMBRE.Location = new Point(169, 141);
             TXTNOMBRE.Name = "TXTNOMBRE";
             TXTNOMBRE.Size = new Size(125, 27);
             TXTNOMBRE.TabIndex = 13;
             // 
             // TXTCALIFICACION
             // 
-            TXTCALIFICACION.Location = new Point(139, 283);
+            TXTCALIFICACION.Location = new Point(169, 229);
             TXTCALIFICACION.Mask = "99999";
             TXTCALIFICACION.Name = "TXTCALIFICACION";
             TXTCALIFICACION.Size = new Size(125, 27);
@@ -167,12 +175,36 @@
             TXTCALIFICACION.ValidatingType = typeof(int);
             TXTCALIFICACION.MaskInputRejected += maskedTextBox1_MaskInputRejected;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Enabled = false;
+            label1.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Location = new Point(94, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(368, 50);
+            label1.TabIndex = 15;
+            label1.Text = "EVALUACIONES R.A";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Enabled = false;
+            label2.Font = new Font("Segoe UI Historic", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.Location = new Point(38, 85);
+            label2.Name = "label2";
+            label2.Size = new Size(479, 23);
+            label2.TabIndex = 16;
+            label2.Text = "Donde tus datos Ingresados se venden en la oscuridad";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(1216, 450);
+            BackColor = SystemColors.ButtonHighlight;
+            ClientSize = new Size(1475, 450);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(TXTCALIFICACION);
             Controls.Add(TXTNOMBRE);
             Controls.Add(LBLNOMBRE);
@@ -210,5 +242,7 @@
         private Label LBLNOMBRE;
         private TextBox TXTNOMBRE;
         private MaskedTextBox TXTCALIFICACION;
+        private Label label1;
+        private Label label2;
     }
 }
