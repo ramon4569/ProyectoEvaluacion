@@ -142,6 +142,16 @@ namespace CapaPresentacion
                 TXTNOMBRE.SelectionStart = textoFiltrado.Length; // Mantener el cursor al final del texto  
             }
         }
+
+        private void TXTCOMENTARIO_TextChanged(object sender, EventArgs e)
+        {
+            string textoFiltrado = string.Concat(TXTCOMENTARIO.Text.Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)));
+            if (TXTCOMENTARIO.Text != textoFiltrado)
+            {
+                TXTCOMENTARIO.Text = textoFiltrado;
+                TXTCOMENTARIO.SelectionStart = textoFiltrado.Length; // Mantener el cursor al final del texto  
+            }
+        }
     }
 
 }

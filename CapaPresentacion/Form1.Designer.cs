@@ -130,6 +130,7 @@
             TXTCOMENTARIO.Name = "TXTCOMENTARIO";
             TXTCOMENTARIO.Size = new Size(125, 27);
             TXTCOMENTARIO.TabIndex = 8;
+            TXTCOMENTARIO.TextChanged += TXTCOMENTARIO_TextChanged;
             // 
             // FECHA
             // 
