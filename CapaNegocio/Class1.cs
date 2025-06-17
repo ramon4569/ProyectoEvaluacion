@@ -19,28 +19,25 @@ namespace CapaNegocio
         public string Comentarios { get; set; }
     }
 
-    public class Examen : Evaluacion
+    class Program 
     {
-        public Examen()
-        {
-            Tipo = "Examen"; // Establecemos el valor de Tipo en el constructor  
-        }
-    }
-    public class Trabajo : Evaluacion
-    {
-        public Trabajo()
-        {
-            Tipo = "Trabajo"; // Establecemos el valor de Tipo en el constructor  
-        }
-    }
-    public class Proyecto : Evaluacion
-    {
-        public Proyecto()
-        {
-            Tipo = "Proyecto"; // Establecemos el valor de Tipo en el constructor  
-        }
 
+        /*static void Main(string[] args)  //Demostrando la Herencia, Aunque ya se puede observar que funciona bien en cada clase 
+        { 
+        
+        Examen examen = new Examen();
+            examen.Tipo = "Queseyo";   
+
+        Proyecto proyecto = new Proyecto();
+            proyecto.Tipo = "Queseyo";
+
+            Trabajo trabajo = new Trabajo();
+            trabajo.Tipo = "Queseyo"; 
+        } */
+    
     }
+  
+    
     public class EvaluacionNegocio
     {
         // Cadena de conexión a la base de datos  
