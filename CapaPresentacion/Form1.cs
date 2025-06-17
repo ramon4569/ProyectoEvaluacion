@@ -131,6 +131,17 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void TXTNOMBRE_TextChanged(object sender, EventArgs e)
+        {
+            // Filtrar el texto para que solo admita letras  
+            string textoFiltrado = string.Concat(TXTNOMBRE.Text.Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)));
+            if (TXTNOMBRE.Text != textoFiltrado)
+            {
+                TXTNOMBRE.Text = textoFiltrado;
+                TXTNOMBRE.SelectionStart = textoFiltrado.Length; // Mantener el cursor al final del texto  
+            }
+        }
     }
 
 }

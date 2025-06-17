@@ -39,10 +39,10 @@
             FECHA = new DateTimePicker();
             LBLCALIFICACION = new Label();
             LBLNOMBRE = new Label();
-            TXTNOMBRE = new TextBox();
             TXTCALIFICACION = new MaskedTextBox();
             label1 = new Label();
             label2 = new Label();
+            TXTNOMBRE = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvEvaluaciones).BeginInit();
             SuspendLayout();
             // 
@@ -158,13 +158,6 @@
             LBLNOMBRE.TabIndex = 12;
             LBLNOMBRE.Text = "NOMBRE";
             // 
-            // TXTNOMBRE
-            // 
-            TXTNOMBRE.Location = new Point(169, 141);
-            TXTNOMBRE.Name = "TXTNOMBRE";
-            TXTNOMBRE.Size = new Size(125, 27);
-            TXTNOMBRE.TabIndex = 13;
-            // 
             // TXTCALIFICACION
             // 
             TXTCALIFICACION.Location = new Point(169, 229);
@@ -196,6 +189,15 @@
             label2.Size = new Size(479, 23);
             label2.TabIndex = 16;
             label2.Text = "Donde tus datos Ingresados se venden en la oscuridad";
+            // 
+            // TXTNOMBRE
+            // 
+            TXTNOMBRE.AccessibleRole = AccessibleRole.None;
+            TXTNOMBRE.Location = new Point(169, 141);
+            TXTNOMBRE.Name = "TXTNOMBRE";
+            TXTNOMBRE.Size = new Size(125, 27);
+            TXTNOMBRE.TabIndex = 13;
+            TXTNOMBRE.TextChanged += TXTNOMBRE_TextChanged;
             // 
             // Form1
             // 
@@ -240,9 +242,9 @@
         
         private Label LBLCALIFICACION;
         private Label LBLNOMBRE;
-        private TextBox TXTNOMBRE;
         private MaskedTextBox TXTCALIFICACION;
         private Label label1;
         private Label label2;
+        private TextBox TXTNOMBRE;
     }
 }
